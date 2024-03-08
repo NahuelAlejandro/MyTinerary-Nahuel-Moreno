@@ -1,7 +1,7 @@
 import Carousel from "../components/Carousel";
 import LayoutMain from "./LayoutMain";
 import {cities} from "../data/data"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Hero from "../components/Hero";
 const Home = ()=>{
    
@@ -21,11 +21,11 @@ const Home = ()=>{
         setEnd (end + 4); 
         setSlide(slide + 1)
 
-    if (slide == 2){
-        setStart (start = 0); 
-        setEnd (end = 4)
-        setSlide(slide = 0); 
-    }
+        if (slide == 2){
+            setStart (start = 0); 
+            setEnd (end = 4)
+            setSlide(slide = 0); 
+        }
     
     } 
   
@@ -35,13 +35,20 @@ const Home = ()=>{
         setEnd (end - 4); 
         setSlide(slide - 1)
 
-    if (slide == 0){
-        setStart (start = 8); 
-        setEnd (end = 12)
-        setSlide(slide = 2); 
-    }
+        if (slide == 0){
+            setStart (start = 8); 
+            setEnd (end = 12)
+            setSlide(slide = 2); 
+        }
     }
     
+    useEffect(()=>{
+       
+       const timeOut = setTimeout(next, 3500) 
+       
+       return ()=>clearTimeout(timeOut)
+       
+    },[next])
    
     return(
         <>
