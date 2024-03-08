@@ -1,15 +1,20 @@
-import Home from "./views/Home";
-import Cities from "./views/Cities";
-
+import  Home  from "./views/Home";
+import  Cities  from "./views/Cities";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
 function App() {
  
 
   return (
-      <div className=' flex flex-col min-h-screen font-["kanit"]'>
-        <Home/>
-      </div>
+   
+      <BrowserRouter>
+        <Routes>
+          <Route path ="/" element = {<Home/>}/>
+          <Route path ="Cities" element = {<Cities/>}/>
+        </Routes>
+      </BrowserRouter>
+    
   )
 }
 

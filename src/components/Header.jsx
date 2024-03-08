@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 
 import { useState } from "react";
 
@@ -10,6 +10,7 @@ const [menu, setMenu] = useState(false);
         setMenu(!menu)
         
     }
+    
 
     return(
         <header className=" flex justify-between items-center bg-black p-2 text-white">
@@ -19,13 +20,13 @@ const [menu, setMenu] = useState(false);
             </section>
             <nav className="flex gap-5 items-center ">
                 <ul className="hidden md:flex md:gap-5 md:items-center ">
-                    <li className="cursor-pointer text-lg hover:text-sky-400"><a href=""></a>Home</li>
-                    <li className="cursor-pointer text-lg hover:text-sky-400"><a href=""></a>Cities</li>
+                    <li className="cursor-pointer text-lg hover:text-sky-400"><Link to="/">Home</Link></li>
+                    <li className="cursor-pointer text-lg hover:text-sky-400"><Link to="/Cities">Cities</Link></li>
                     <li className="w-10"><img className="w-full bg-white p-2 rounded-full" src="/user-img.png" alt="user-img" /></li>
                 </ul>
                 <ul className={`${menu?"":"hidden"} z-[1] flex flex-col gap-7 justify-center bg-black/65 items-center fixed w-full h-full top-0 left-0 md:hidden`}>
-                    <li className=" text-2xl"><a href="#"></a>Home</li>
-                    <li className=" text-2xl"><a href="../views/cities"></a>Cities</li>
+                    <li className=" text-2xl"><Link to="/">Home</Link></li>
+                    <li className=" text-2xl"><Link to="/Cities">Cities</Link></li>
                     <li className="w-32 order-first	"><img className="w-full bg-white p-2 rounded-full" src="/user-img.png" alt="user-img" /></li>
                 </ul>
             </nav>

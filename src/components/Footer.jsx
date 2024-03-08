@@ -1,11 +1,14 @@
+import { Link } from "react-router-dom";
+
+
 const Footer = ()=>{
     return(
         <footer className="bg-black flex flex-col items-center text-white justify-around px-4 w-full gap-4 py-4 md:flex-row md:items-start">
                <section className=" flex flex-col items-center gap-3 md:gap-5">
                 <h3 className="text-xl font-semibold lg:text-3xl text-sky-400">Navigate</h3>
                 <ul className=" flex flex-col lg:text-lg gap-2">
-                    <li><a className="hover:text-sky-400" href="#">Home</a></li>
-                    <li><a className="hover:text-sky-400" href="#">City</a></li>
+                    <li><Link className="hover:text-sky-400" to="/">Home</Link></li>
+                    <li><Link className="hover:text-sky-400"  to="/Cities">Cities</Link></li>
                 </ul>
             </section>
             <section className=" flex flex-col items-center gap-3 md:gap-5">
