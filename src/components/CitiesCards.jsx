@@ -3,7 +3,7 @@ import React from 'react'
 const CitiesCards = ({city}) => {
 
     function handleClick(e) {
-        console.log([location.href])
+        
       location.href = `/cities/${e.target.parentElement.id}`
         
     }
