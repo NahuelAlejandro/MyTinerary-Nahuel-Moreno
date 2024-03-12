@@ -29,9 +29,8 @@ const [menu, setMenu] = useState(false);
                     {links.map((link)=> <li key={link.title} ><Link className={`cursor-pointer text-lg px-3 py-1 rounded hover:text-sky-300 ${link.active ? " bg-sky-700/45 border-[1px] border-sky-300 text-sky-300":""}`} to={link.path}>{link.title}</Link></li>)}
                     <li className="w-10"><img className="w-full bg-white p-2 rounded-full" src="/user-img.png" alt="user-img" /></li>
                 </ul>
-                <ul className={`${menu?"":"hidden"} z-[1] flex flex-col gap-7 justify-center bg-black/65 items-center fixed w-full h-full top-0 left-0 md:hidden`}>
-                    <li className=" text-2xl"><Link to="/">Home</Link></li>
-                    <li className=" text-2xl"><Link to="/Cities">Cities</Link></li>
+                <ul className={`${menu?"":"hidden"} z-[1] flex flex-col gap-7 justify-center bg-black/70 items-center fixed w-full h-full top-0 left-0 md:hidden`}>
+                {links.map((link)=> <li key={link.title} ><Link className={`text-2xl font-semibold ${link.active ? " text-sky-500":""}`} to={link.path}>{link.title}</Link></li>)}
                     <li className="w-32 order-first	"><img className="w-full bg-white p-2 rounded-full" src="/user-img.png" alt="user-img" /></li>
                 </ul>
             </nav>
