@@ -1,14 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 
 const Footer = ()=>{
+
+const location = useLocation();
+
+const links=[
+    {path:"/", title:"Home", active:"/" == location.pathname},
+    {path:"/Cities", title:"Cities", active:"/Cities" == location.pathname}
+]
+
+    
     return(
         <footer className="bg-black flex flex-col items-center text-white justify-around px-4 w-full gap-4 py-4 md:flex-row md:items-start">
                <section className=" flex flex-col items-center gap-3 md:gap-5">
                 <h3 className="text-xl font-semibold lg:text-3xl text-sky-400">Navigate</h3>
                 <ul className=" flex flex-col lg:text-lg gap-2">
-                    <li><Link className="hover:text-sky-400" to="/">Home</Link></li>
-                    <li><Link className="hover:text-sky-400"  to="/Cities">Cities</Link></li>
+                {links.map((link)=> <li key={link.title} ><Link className={`cursor-pointer text-lg px-3 py-1 rounded hover:text-sky-300 ${link.active ? " bg-sky-700/45 border-[1px] border-sky-300 text-sky-300":""}`} to={link.path}>{link.title}</Link></li>)}
                 </ul>
             </section>
             <section className=" flex flex-col items-center gap-3 md:gap-5">

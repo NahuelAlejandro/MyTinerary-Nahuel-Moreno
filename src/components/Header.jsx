@@ -1,9 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { useState } from "react";
 
 const Header = ()=>{
 
+const location = useLocation();
+
+const links=[
+    {path:"/", title:"Home", active:"/" == location.pathname},
+    {path:"/Cities", title:"Cities", active:"/Cities" == location.pathname}
+]
 
 const [menu, setMenu] = useState(false);
     const openMenu = ()=>{
@@ -20,8 +26,7 @@ const [menu, setMenu] = useState(false);
             </section>
             <nav className="flex gap-5 items-center ">
                 <ul className="hidden md:flex md:gap-5 md:items-center ">
-                    <li className="cursor-pointer text-lg hover:text-sky-400"><Link to="/">Home</Link></li>
-                    <li className="cursor-pointer text-lg hover:text-sky-400"><Link to="/Cities">Cities</Link></li>
+                    {links.map((link)=> <li key={link.title} ><Link className={`cursor-pointer text-lg px-3 py-1 rounded hover:text-sky-300 ${link.active ? " bg-sky-700/45 border-[1px] border-sky-300 text-sky-300":""}`} to={link.path}>{link.title}</Link></li>)}
                     <li className="w-10"><img className="w-full bg-white p-2 rounded-full" src="/user-img.png" alt="user-img" /></li>
                 </ul>
                 <ul className={`${menu?"":"hidden"} z-[1] flex flex-col gap-7 justify-center bg-black/65 items-center fixed w-full h-full top-0 left-0 md:hidden`}>
