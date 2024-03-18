@@ -44,7 +44,7 @@ const Cities = ()=>{
                     <h2 className=" font-semibold text-sky-300 text-5xl">Cities</h2>
                     <input type="text" className="outline-none border-2 border-sky-600 shadow-md shadow-sky-300 rounded w-3/4 md:w-2/4 lg:w-2/5 lg:h-8 font-semibold indent-3 text-lg lg:text-2xl" placeholder="Search For Cities ..." name="inputSearch" onInput={handleInput} ref={searchInput} defaultValue={search}/>
                     <div className="w-full flex gap-5 flex-wrap justify-center group ">     
-                        {filteredCity.length > 0 ?filteredCity.map(city => <CitiesCards key={city._id} city={city}/>):<p className="text-sky-300 text-5xl pt-14">Sorry not found results</p>}
+                        {filteredCity.length > 0 ?filteredCity.map(city => <CitiesCards key={city._id} city={city}/>):<p className="text-sky-300 text-5xl pt-14">Sorry, we can't find any cities that include "{search}"</p>}
                     </div> 
                 </section>
             </main>     
