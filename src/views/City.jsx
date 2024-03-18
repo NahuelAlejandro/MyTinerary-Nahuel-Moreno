@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import LayoutMain from './LayoutMain'
 import { Link, useParams } from 'react-router-dom'
-import { getCity } from '../sevice/citiesQueries'
+import { getCity, getItineraries } from '../sevice/citiesQueries'
+import Itineraries from '../components/Itineraries'
 
 const City = () => {
 
@@ -23,7 +24,16 @@ const City = () => {
         .finally(()=> setLoading(false));
 
     },[])
-    
+    const [cityItinerary, setCityItinerary] = useState([]);
+
+    useEffect(()=>{
+        getItineraries(cityId.id).then((response)=>{
+            setCityItinerary(response.data)
+        })
+       
+    },[]) 
+   
+
     
         if(loading){
             return(
@@ -47,12 +57,22 @@ const City = () => {
   return (
     <>
         <LayoutMain>
-            <main className='grow flex flex-col gap-5 justify-center items-center bg-gray-500 py-10'>
-                {city.name != undefined ? <img className=' h-52 rounded border-2 border-sky-800 md:h-96' src={`${city.image}`} alt={`${city.name}`} /> :"" }
-                {city.name != undefined ?<h2 className='text-2xl font font-semibold '>{city.name}</h2> : <h2 className='text-3xl font font-semibold md:text-7xl'>City is not available</h2> }
-                <h3 className='font-semibold text-4xl md:text-5xl'>Under construction</h3>
-                <Link className='px-3 py-1 font-semibold bg-sky-500 border-[1px] shadow-md shadow-sky-800 hover:bg-sky-400 border-black rounded-xl' to="/Cities">Go to cities</Link>                        
-            </main>
+            <div className='grow flex flex-col gap-4 justify-center items-center bg-gray-500 py-10 '>
+                <main className=' w-11/12 flex flex-col gap-5 '>
+                    <section className='flex flex-col gap-5 justify-center items-center '>
+                        {city.name != undefined ? <h2 className='text-2xl lg:text-5xl font font-semibold '>{city.name}</h2> : <h2 className='text-3xl font font-semibold md:text-7xl'>City is not available</h2> }
+                        {city.name != undefined ? <img className=' w-60 rounded border-2 border-sky-600 md:w-96 lg:w-2/3 lg:h-[570px]' src={`${city.image}`} alt={`${city.name}`} /> :"" }
+                    </section>
+                    <section className='flex flex-col items-center gap-5 w-full'>
+                        {cityItinerary ?<h3 className='font-semibold text-2xl md:text-5xl'>Itineraries</h3>:""}
+                        <div className='w-full flex flex-col gap-5 items-center lg:items-stretch lg:flex-row lg:justify-around'>
+                            {cityItinerary ? cityItinerary.length == [] ?<p className='font-semibold text-xl lg:text-3xl'>"Sorry, There are no itineraries available for this city"</p>:cityItinerary.map(itinerary=> <Itineraries key={itinerary._id} itinerary={itinerary}/>):""}
+                        </div>
+                    </section>
+                        
+                </main>
+                        <Link className='px-3 py-1 font-semibold bg-sky-500 border-[1px] shadow-md shadow-sky-800 hover:bg-sky-400 border-black rounded-xl' to="/Cities">Go to cities</Link>                        
+            </div>
         </LayoutMain> 
     </>
   )
