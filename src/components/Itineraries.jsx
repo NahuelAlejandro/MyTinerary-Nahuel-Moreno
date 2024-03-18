@@ -51,10 +51,10 @@ const Itineraries = (itineraries) => {
         </section>
       </article>
       <div className='w-full flex gap-3 flex-col items-center xl:flex-row xl:justify-center'>
-        {itineraries.itinerary.activities.map(activity=> <img className='w-5/6 rounded  object-cover border-2 border-sky-600 md:h-60 xl:h-28 xl:w-40' src={`${activity}`} alt={`image of ${itineraries.itinerary.title}`} />)}
+        {itineraries.itinerary.activities.map(activity=> <img className='w-full rounded  object-cover border-2 border-sky-600 md:h-80 xl:h-28 xl:w-40' key={activity} src={`${activity}`} alt={`image of ${itineraries.itinerary.title}`} />)}
       </div> 
       <section className='flex flex-wrap justify-center gap-3'>
-        {itineraries.itinerary.hashtags.map( hashtag=> <span className='px-2 py-1 rounded bg-sky-600 text-sky-200'>{hashtag}</span>)}
+        {itineraries.itinerary.hashtags.map( hashtag=> <span key={hashtag} className='px-2 py-1 rounded bg-sky-600 text-sky-200'>{hashtag}</span>)}
       </section>
       <h3 className='text-xl md:text-2xl font-semibold text-sky-600'>Description:</h3>
       <p className='text-lg  text-white'>{itineraries.itinerary.description}</p>
