@@ -3,12 +3,17 @@ import LayoutMain from "./LayoutMain";
 import { useEffect, useState } from "react"
 import Hero from "../components/Hero";
 import { getCities } from "../sevice/citiesQueries";
+import { useDispatch, useSelector } from "react-redux";
+import { loadCities} from "../redux/actions/citiesActions"
 
 const Home = ()=>{
-    const [cities, setCities] = useState([])
+    const cities = useSelector((store)=> store.citiesStore.cities);
+    const dispatch = useDispatch();
 
     useEffect(()=>{
-        getCities().then(response => setCities(response.data))
+        if(cities == 0){
+            getCities().then(response => dispatch(loadCities(response.data)))
+        }
     },[])
     
     
@@ -25,7 +30,7 @@ const Home = ()=>{
     
     
     
-    let[slide, setSlide] = useState(0)
+    let [slide, setSlide] = useState(0)
     
     
     const next = () => {
