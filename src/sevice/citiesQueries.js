@@ -6,7 +6,7 @@ export const getCities = async () => {
     return response.data ;
 } catch (error) {
 
-    return []
+    return [];
 }
 }
 
@@ -16,6 +16,16 @@ export const getCity = async (id) => {
     return response.data ;
 } catch (error) {
 
-    return []
+    return [];
 }
+}
+
+
+export const getItineraries = async(id)=>{
+    try {
+        const response = await axios("http://localhost:4000/api/itineraries/city/" + id);
+        return response.data;
+    } catch (error) {
+        return [];
+    }
 }
