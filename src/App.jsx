@@ -11,6 +11,8 @@ import { useEffect } from "react";
 import authQueries from "./sevice/authQueries";
 import alerts from "./utils/alerts";
 import { logIn } from "./redux/actions/userActions";
+import AuthPublicViews from "./guard/AuthPublicViews";
+
 
 function App() {
   const dispatch = useDispatch()
@@ -31,8 +33,10 @@ function App() {
             <Route path ="/" element = {<Home/>}/>
             <Route path ="Cities" element = {<Cities/>}/>
             <Route path ="Cities/:id" element = {<City/>}/>
-            <Route path ="/SignUp" element = {<SignUp/>}/>
-            <Route path ="/Login" element = {<Login/>}/>
+            <Route element={<AuthPublicViews/>}>
+              <Route path ="/SignUp" element = {<SignUp/>}/>
+              <Route path ="/Login" element = {<Login/>}/>
+            </Route>
           </Routes>
         <ToastContainer/>
       </BrowserRouter>
