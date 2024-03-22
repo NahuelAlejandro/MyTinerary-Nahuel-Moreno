@@ -2,36 +2,20 @@ import React from 'react'
 
 const Itineraries = (itineraries) => {
 
+  
   function price(price) {
-    if( price <= 5){
-      if(price <= 4){
-        if(price <= 3){
-          if(price <= 2){
-            if(price == 1){
-              return "💵"
-            }
-            return "💵💵"
-          }
-          return "💵💵💵"
-        }
-        return "💵💵💵💵"
-      }
+    if ( price == 1){
+      return "💵"
+    } else if(price == 2){
+      return "💵💵"
+    } else if(price == 3){
+      return "💵💵💵"
+    } else if(price == 4){
+      return "💵💵💵💵"
+    } else if(price == 5){
       return "💵💵💵💵💵"
-    } 
+    }
   }
-  // function price(price) {
-  //   if ( price == 1){
-  //     return "💵"
-  //   } else if(price == 2){
-  //     return "💵💵"
-  //   } else if(price == 3){
-  //     return "💵💵💵"
-  //   } else if(price == 4){
-  //     return "💵💵💵💵"
-  //   } else if(price == 5){
-  //     return "💵💵💵💵💵"
-  //   }
-  // }
     
  
 
