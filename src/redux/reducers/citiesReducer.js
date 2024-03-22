@@ -6,7 +6,7 @@ const intialState = {
     search: ""
 }
 
-export const citiesReducer = createReducer( intialState, (builder)=> {
+const citiesReducer = createReducer( intialState, (builder)=> {
     builder.addCase(loadCities,( state, action )=>{
         return {
             ...state,
