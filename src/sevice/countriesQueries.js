@@ -1,0 +1,16 @@
+import axios from "axios";
+
+
+const getCountries = async()=>{
+    try {
+        const {data} = await axios("https://restcountries.com/v3.1/all?fields=name");
+       
+        const countries = data.map(country => country.name.common)
+       
+        return countries.sort()
+    } catch (error) {
+        return []
+    }
+ 
+} 
+export default getCountries;
