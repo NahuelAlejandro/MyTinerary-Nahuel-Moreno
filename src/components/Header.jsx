@@ -1,22 +1,32 @@
 import { Link, useLocation } from "react-router-dom";
-
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logOut } from "../redux/actions/userActions";
 
 const Header = ()=>{
 
-const location = useLocation();
+    const user = useSelector((store)=> store.users.user)
 
-const links=[
-    {path:"/", title:"Home", active:"/" == location.pathname},
-    {path:"/Cities", title:"Cities", active:"/Cities" == location.pathname}
-]
+    const dispatch= useDispatch()
 
-const [menu, setMenu] = useState(false);
-    const openMenu = ()=>{
-        setMenu(!menu)
-        
-    }
+    const location = useLocation();
+    console.log()
+    const links=[
+        {path:"/", title:"Home", active:"/" == location.pathname, visible:true},
+        {path:"/Cities", title:"Cities", active:"/Cities" == location.pathname, visible:true},
+        {path:"/Login", title:"Login", active:"/Login" == location.pathname, visible:user.last_name? false:true},
+        {path:"/SignUp", title:"Sign Up", active:"/SignUp" == location.pathname, visible:user.last_name? false:true}
+    ]
+
+    const [menu, setMenu] = useState(false);
+        const openMenu = ()=>{
+            setMenu(!menu)
+            
+        }
     
+   function handleClick(){
+        dispatch(logOut())
+   }
 
     return(
         <header className=" flex justify-between items-center bg-black p-2 text-white">
@@ -26,12 +36,20 @@ const [menu, setMenu] = useState(false);
             </section>
             <nav className="flex gap-5 items-center ">
                 <ul className="hidden md:flex md:gap-5 md:items-center ">
-                    {links.map((link)=> <li key={link.title} ><Link className={`cursor-pointer text-lg px-3 py-1 rounded hover:text-sky-300 ${link.active ? " bg-sky-700/45 border-[1px] border-sky-300 text-sky-300":""}`} to={link.path}>{link.title}</Link></li>)}
-                    <li className="w-10"><img className="w-full bg-white p-2 rounded-full" src="/user-img.png" alt="user-img" /></li>
+                    {links.map((link)=> link.visible 
+                    ? (<li key={link.title} ><Link className={`cursor-pointer text-lg px-3 py-1 rounded hover:text-sky-300 ${link.active ? " bg-sky-700/45 border-[1px] border-sky-300 text-sky-300":""}`} to={link.path}>{link.title}</Link></li>) 
+                    : null)}
+                    {user.last_name? <li className="w-12 h-12 order-last"><img className="w-full h-full bg-white p-[2px] rounded-full" src={`${user.image}`} alt="user-img" /></li> 
+                    :<li className="w-10"><img className="w-full bg-white p-2 rounded-full" src="/user-img.png" alt="user-img" /></li>}
+                    {user.last_name?<li><button className="text-md px-2 py-[2px] rounded bg-red-600/80 hover:bg-red-600 border-[1px]" onClick={handleClick}>Log out</button></li>:""}
                 </ul>
                 <ul className={`${menu?"":"hidden"} z-[1] flex flex-col gap-7 justify-center bg-black/70 items-center fixed w-full h-full top-0 left-0 md:hidden`}>
-                {links.map((link)=> <li key={link.title} ><Link className={`text-2xl font-semibold ${link.active ? " text-sky-500":""}`} to={link.path}>{link.title}</Link></li>)}
-                    <li className="w-32 order-first	"><img className="w-full bg-white p-2 rounded-full" src="/user-img.png" alt="user-img" /></li>
+                    {links.map((link)=> link.visible 
+                    ? (<li key={link.title} ><Link className={`text-2xl font-semibold  ${link.active ? " text-sky-500":""}`} to={link.path}>{link.title}</Link></li>) 
+                    : null)}
+                    {user.last_name? <li className="w-32 h-32 order-first	"><img className="w-full h-full bg-white p-[2px] rounded-full" src={`${user.image}`} alt="user-img" /></li> 
+                    :<li className="w-32 order-first"><img className="w-full bg-white p-2 rounded-full" src="/user-img.png" alt="user-img" /></li>}
+                    {user.last_name ? <li><button className="text-md px-2 py-[2px] rounded bg-red-600/80 hover:bg-red-600 border-[1px]" onClick={handleClick}>Log out</button></li>:""}
                 </ul>
             </nav>
             <svg className={`${menu?"hidden":""} h-8 w-8 text-white md:hidden z-[1]  `} fill="none" viewBox="0 0 24 24"  stroke="currentColor" aria-hidden="true" onClick={openMenu} >
