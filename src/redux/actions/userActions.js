@@ -13,3 +13,9 @@ export const logOut = createAction("logOut",()=>{
         payload:{}
     }
 })
+
+export const update = createAction("update",(data)=>{
+    return {
+        payload:data
+    }
+})
