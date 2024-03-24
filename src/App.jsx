@@ -12,18 +12,25 @@ import authQueries from "./sevice/authQueries";
 import alerts from "./utils/alerts";
 import { logIn } from "./redux/actions/userActions";
 import AuthPublicViews from "./guard/AuthPublicViews";
+import Profile from "./views/Profile";
 
 
 function App() {
   const dispatch = useDispatch()
- 
+
+
+
   useEffect(()=>{
-    authQueries.loginWithToken().then((response)=>{
-      if(response.status == 200){
-        dispatch(logIn(response.data))
-        alerts.success(`welcome ` + response.data.first_name)
-      }
-    });
+    
+    if (localStorage.getItem("token")){
+      authQueries.loginWithToken().then((response)=>{
+        if(response.status == 200){
+          dispatch(logIn(response.data))
+          alerts.success(`welcome ` + response.data.first_name)
+        }
+      })
+    }
+    
   },[])
 
   return (
@@ -37,6 +44,7 @@ function App() {
               <Route path ="/SignUp" element = {<SignUp/>}/>
               <Route path ="/Login" element = {<Login/>}/>
             </Route>
+              <Route path ="/Profile" element = {<Profile/>}/>
           </Routes>
         <ToastContainer/>
       </BrowserRouter>
