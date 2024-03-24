@@ -10,12 +10,13 @@ const Header = ()=>{
     const dispatch= useDispatch()
 
     const location = useLocation();
-    console.log()
+    
     const links=[
         {path:"/", title:"Home", active:"/" == location.pathname, visible:true},
         {path:"/Cities", title:"Cities", active:"/Cities" == location.pathname, visible:true},
         {path:"/Login", title:"Login", active:"/Login" == location.pathname, visible:user.last_name? false:true},
-        {path:"/SignUp", title:"Sign Up", active:"/SignUp" == location.pathname, visible:user.last_name? false:true}
+        {path:"/SignUp", title:"Sign Up", active:"/SignUp" == location.pathname, visible:user.last_name? false:true},
+        {path:"/Profile", title:"Profile", active:"/Profile" == location.pathname, visible:user.last_name? true:false}
     ]
 
     const [menu, setMenu] = useState(false);
