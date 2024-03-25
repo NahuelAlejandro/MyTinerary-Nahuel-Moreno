@@ -59,8 +59,8 @@ function handleSubmit(e) {
                     <input className='outline-none rounded indent-2 font-semibold w-4/5 lg:h-8' name='last_name' type="text" placeholder='Last Name'/>
                     <input className='outline-none rounded indent-2 w-4/5 lg:h-8' name='email' type="email" placeholder='Email'/>
                     <input className='outline-none rounded indent-2 font-semibold w-4/5 lg:h-8' name='password' type="password" placeholder='Password'/>
-                    <select className='outline-none rounded indent-2 font-semibold h-6 w-4/5 lg:h-8 ' name="country" defaultValue={formData.country}>
-                        {/* <option defaultValue="" selected disabled>Select your country</option> */}
+                    <select className='outline-none rounded indent-2 font-semibold h-6 w-4/5 lg:h-8 ' name="country" defaultValue="select_your_country">
+                        <option value="select_your_country" disabled>Select your country</option> 
                         {countries.length > 0 && countries.map(country=> <option value={country} key={country}>{country}</option>)}
                     </select>
                     <input className='outline-none rounded indent-2 font-semibold w-4/5 lg:h-8 ' name='image' type="text" placeholder='URL Image'/>
